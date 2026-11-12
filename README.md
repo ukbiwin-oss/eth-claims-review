@@ -21,6 +21,8 @@ Prepared by Lee Miller with Claude, an AI model made by Anthropic. Anthropic is 
 
 Corrections are welcome. Please open an issue, or write to research@lee-miller.com.
 
+- 12 November 2026, physics report: the first version said that no concrete qubit or photon estimate changes. That missed the extra assumption (simulation cost linear in the number of circuit elements) behind Dalzell et al.'s figures for 500-element circuits. Corrected in the summary, table row A12 and sections 2, 4, 5 and 8.
+
 ## Licence
 
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
