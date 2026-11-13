@@ -7,6 +7,8 @@ Two cited literature reviews of the claims, published on 26 and 27 October 2026,
 
 The same reports are on the web at <https://www.lee-miller.com/eth>.
 
+- [notes/](notes/) (added 13 November 2026): two of the physics report's unreviewed inferences written out in full, with code and test output. One is the argument that an exact #3-SAT counter would refute Morimae–Tamaki Conjecture 7; the other is the encoding of a 500-gate circuit's polynomial into a 5-CNF. They are still unreviewed, and the reports themselves are unchanged.
+
 ## What this is and is not
 
 - These reviews report and cite. They do not prove anything new, and they do not check the labs' proofs.

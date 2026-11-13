@@ -1,0 +1,84 @@
+poly3_to_cnf.py test report
+python 3.14.4, numpy 2.5.4, seed 20261113
+Every PASS also requires the bounds measured from the clause list: width <= 5, N <= n + M - 1, clauses <= 16M - 16.
+
+A. all 128 polynomials on 3 variables x constant term 0/1 x both groupings (greedy gives one group here, so only the single grouping builds chains), every CNF assignment enumerated: 512/512 pass
+B. all 16,384 polynomials on 4 variables x constant term 0/1, greedy grouping (chains of up to 3 chain variables), every CNF assignment enumerated: 32768/32768 pass
+
+C. random polynomials, every CNF assignment enumerated (check 1)
+   n   M  c  grouping   N  clauses  width      zeros  satisfying  result
+   5   8  0  single    12       98      5         18          18  PASS
+   5   8  1  single    12       66      5         14          14  PASS
+   5   8  0  single    12       82      5         20          20  PASS
+   6  10  0  single    15       92      5         28          28  PASS
+   6  10  1  single    15      104      5         32          32  PASS
+   6  10  0  single    15      102      5         40          40  PASS
+   8  12  0  single    19      116      5        116         116  PASS
+   8  12  1  single    19      106      5        128         128  PASS
+   8  12  0  single    19      122      5        128         128  PASS
+  10  12  0  single    21      118      5        544         544  PASS
+  10  12  1  single    21      102      5        480         480  PASS
+  10  12  0  single    21      112      5        512         512  PASS
+  12  12  0  single    23      114      5       2048        2048  PASS
+  12  12  1  single    23      114      5       2048        2048  PASS
+  12  12  0  single    23      110      5       2048        2048  PASS
+  14  10  0  single    23       94      5       8192        8192  PASS
+  14  10  1  single    23      108      5       8192        8192  PASS
+  14  10  1  single    23       74      5       8192        8192  PASS
+  16   9  0  single    24       98      5      32768       32768  PASS
+  16   9  1  single    24       60      4      32768       32768  PASS
+  16   9  0  single    24       98      5      32768       32768  PASS
+  18   7  0  single    24       54      5     131072      131072  PASS
+  18   7  1  single    24       40      4     131072      131072  PASS
+  18   7  1  single    24       50      5     114688      114688  PASS
+  20   5  0  single    24       40      5     573440      573440  PASS
+  20   5  1  single    24       50      5     524288      524288  PASS
+  20   5  1  single    24       26      4     524288      524288  PASS
+   6  19  0  greedy    13      108      5         34          34  PASS
+   6  19  1  greedy    14      128      5         30          30  PASS
+   6  19  0  greedy    13      112      5         32          32  PASS
+   8  17  0  greedy    16      116      5        140         140  PASS
+   8  17  1  greedy    16      124      5        124         124  PASS
+   8  17  1  greedy    16      124      5        124         124  PASS
+  10  15  0  greedy    17      100      5        496         496  PASS
+  10  15  1  greedy    17      100      5        512         512  PASS
+  10  15  0  greedy    18      116      5        520         520  PASS
+  12  13  0  greedy    19      108      5       2112        2112  PASS
+  12  13  1  greedy    19       92      5       2048        2048  PASS
+  12  13  1  greedy    19      100      5       2048        2048  PASS
+  16   9  0  greedy    21       74      5      32768       32768  PASS
+  16   9  1  greedy    21       68      5      31232       31232  PASS
+  16   9  0  greedy    21       60      5      33792       33792  PASS
+
+D. random polynomials, unit propagation from every x (check 2)
+   n   M  c  grouping   N  clauses  width      zeros  unique-ext  no-ext  undecided  result
+  10  30  0  single    39      288      5        520         520     504          0  PASS
+  12  40  1  single    51      384      5       2048        2048    2048          0  PASS
+  14  40  1  single    53      444      5       8160        8160    8224          0  PASS
+  16  40  0  single    55      392      5      32704       32704   32832          0  PASS
+  18  40  0  single    57      364      5     131072      131072  131072          0  PASS
+  20  40  0  single    59      410      5     524544      524544  524032          0  PASS
+  20  60  0  single    79      560      5     523904      523904  524672          0  PASS
+  20  60  1  greedy    50      468      5     525312      525312  523264          0  PASS
+  16 100  1  greedy    70      852      5      32704       32704   32832          0  PASS
+  16 100  0  single   115     1120      5      32736       32736   32800          0  PASS
+
+E. 300 random polynomials with repeated monomials, zeros taken from a second plain-Python evaluation of the raw list (shares no code with the encoder): 300/300 pass
+F. controls: 90 altered encodings (a clause dropped, a literal flipped, or the wrong constant term). Check 1 rejects 75; the other 15 are still correct encodings. Check 2 rejects 75, including every one check 1 rejects (0 missed). Wrong constant term: 30/30 rejected by both.
+
+G. 208 variables and 500 monomials: unit propagation from 5,000 random x (2^208 cannot be enumerated)
+   mix                           c  grouping   N  clauses  width  f=0  unique-ext  f=1  no-ext  undecided  result
+   all degree 3 (CCZ only)       0  single   707    7984      5  2520       2520  2480   2480         0  PASS
+   all degree 3 (CCZ only)       0  greedy   707    7984      5  2526       2526  2474   2474         0  PASS
+   degrees 1, 2, 3 (Z, CZ, CCZ)  0  single   707    5002      5  2487       2487  2513   2513         0  PASS
+   degrees 1, 2, 3 (Z, CZ, CCZ)  1  greedy   496    4484      5  2528       2528  2472   2472         0  PASS
+
+Variable counts for 208 variables and 500 monomials (the 500-gate IQP case of the report)
+  worst case for this encoding, any polynomial: n + M - 1 = 707 variables (one chain variable per monomial but one); at most 16M - 16 = 7984 clauses; width at most 5
+  this greedy grouping on uniformly random monomials (20 draws each; min / median / max):
+    all degree 3 (CCZ only)                              variables 707 / 707 / 707   clauses 7984 / 7984 / 7984   width 5
+    degrees 1, 2, 3 equally likely (Z, CZ, CCZ)          variables 488 / 502 / 518   clauses 4340 / 4492 / 4724   width 5
+    degrees 2 and 3 equally likely (CZ, CCZ)             variables 577 / 592 / 609   clauses 5764 / 5964 / 6244   width 5
+    degree 2 only (CZ only; quadratic, so easy anyway)   variables 459 / 462 / 464   clauses 3940 / 3956 / 3980   width 5
+
+ALL CHECKS PASS  (17 s)

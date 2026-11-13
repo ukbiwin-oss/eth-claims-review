@@ -1,0 +1,8 @@
+edge case: no clauses, n=0              gap =   -1  PASS
+edge case: no clauses, n=5              gap =  -32  PASS
+edge case: one empty clause, n=4        gap =   16  PASS
+edge case: x1 alone, n=1 (balanced)     gap =    0  PASS
+edge case: x1 alone, n=6 (balanced)     gap =    0  PASS
+edge case: x1 and not x1, n=3           gap =    8  PASS
+
+20006/20006 cases pass (20,000 random clause lists, n up to 12, m up to 8, clause width 1-3; 16858 had unused variables, 2507 had gap = 0)
