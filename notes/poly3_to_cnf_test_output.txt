@@ -1,9 +1,9 @@
 poly3_to_cnf.py test report
 python 3.14.4, numpy 2.5.4, seed 20261113
-Every PASS also requires the bounds measured from the clause list: width <= 5, N <= n + M - 1, clauses <= 16M - 16.
+Every PASS also requires the bounds: width <= 5 and clauses <= 16M - 16 for M >= 2 (8 for M = 1), measured from the clause list; N <= n + M - 1 for M >= 1.
 
-A. all 128 polynomials on 3 variables x constant term 0/1 x both groupings (greedy gives one group here, so only the single grouping builds chains), every CNF assignment enumerated: 512/512 pass
-B. all 16,384 polynomials on 4 variables x constant term 0/1, greedy grouping (chains of up to 3 chain variables), every CNF assignment enumerated: 32768/32768 pass
+A. all 128 polynomials of degree at most 3 on 3 variables x constant term 0/1 x both groupings (greedy gives one group here, so only the single grouping builds chains), every CNF assignment enumerated: 512/512 pass
+B. all 16,384 polynomials of degree at most 3 on 4 variables x constant term 0/1, greedy grouping (chains of up to 3 chain variables), every CNF assignment enumerated: 32768/32768 pass
 
 C. random polynomials, every CNF assignment enumerated (check 1)
    n   M  c  grouping   N  clauses  width      zeros  satisfying  result
@@ -63,7 +63,7 @@ D. random polynomials, unit propagation from every x (check 2)
   16 100  1  greedy    70      852      5      32704       32704   32832          0  PASS
   16 100  0  single   115     1120      5      32736       32736   32800          0  PASS
 
-E. 300 random polynomials with repeated monomials, zeros taken from a second plain-Python evaluation of the raw list (shares no code with the encoder): 300/300 pass
+E. 300 random polynomials with up to 3 repeated monomials each, zeros taken from a second plain-Python evaluation of the raw list (shares no code with the encoder): 300/300 pass
 F. controls: 90 altered encodings (a clause dropped, a literal flipped, or the wrong constant term). Check 1 rejects 75; the other 15 are still correct encodings. Check 2 rejects 75, including every one check 1 rejects (0 missed). Wrong constant term: 30/30 rejected by both.
 
 G. 208 variables and 500 monomials: unit propagation from 5,000 random x (2^208 cannot be enumerated)

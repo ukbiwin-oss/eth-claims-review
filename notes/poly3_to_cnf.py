@@ -277,8 +277,8 @@ def run_tests() -> int:
     failures = 0
     print('poly3_to_cnf.py test report')
     print(f'python {sys.version.split()[0]}, numpy {np.__version__}, seed 20261113')
-    print('Every PASS also requires the bounds measured from the clause list: width <= 5, N <= n + M - 1, '
-          'clauses <= 16M - 16.\n')
+    print('Every PASS also requires the bounds: width <= 5 and clauses <= 16M - 16 for M >= 2 (8 for M = 1), measured '
+          'from the clause list; N <= n + M - 1 for M >= 1.\n')
 
     # A. every polynomial on 3 variables (7 monomials -> 128 polynomials), both constant terms, both groupings
     cases = bad = 0
@@ -288,7 +288,7 @@ def run_tests() -> int:
         for const in (0, 1):
             for greedy in (True, False):
                 r = check_exhaustive(3, poly, const, greedy); cases += 1; bad += not r['ok']
-    print(f'A. all 128 polynomials on 3 variables x constant term 0/1 x both groupings (greedy gives one group '
+    print(f'A. all 128 polynomials of degree at most 3 on 3 variables x constant term 0/1 x both groupings (greedy gives one group '
           f'here, so only the single grouping builds chains), every CNF assignment enumerated: '
           f'{cases - bad}/{cases} pass')
     failures += bad
@@ -301,7 +301,7 @@ def run_tests() -> int:
         poly = [m for i, m in enumerate(monos4) if mask >> i & 1]
         for const in (0, 1):
             r = check_exhaustive(4, poly, const, True); cases += 1; bad += not r['ok']; worstN = max(worstN, r['N'])
-    print(f'B. all 16,384 polynomials on 4 variables x constant term 0/1, greedy grouping (chains of up to '
+    print(f'B. all 16,384 polynomials of degree at most 3 on 4 variables x constant term 0/1, greedy grouping (chains of up to '
           f'{worstN - 4} chain variables), every CNF assignment enumerated: {cases - bad}/{cases} pass')
     failures += bad
 
@@ -339,7 +339,7 @@ def run_tests() -> int:
         const = int(rng.integers(2)); greedy = bool(rng.integers(2))
         r = check_exhaustive(n, raw, const, greedy, reference=naive_values(n, raw, const))
         cases += 1; bad += not r['ok']
-    print(f'\nE. 300 random polynomials with repeated monomials, zeros taken from a second plain-Python evaluation '
+    print(f'\nE. 300 random polynomials with up to 3 repeated monomials each, zeros taken from a second plain-Python evaluation '
           f'of the raw list (shares no code with the encoder): {cases - bad}/{cases} pass')
     failures += bad
 
