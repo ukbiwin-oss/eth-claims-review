@@ -17,7 +17,9 @@ The same reports are on the web at <https://www.lee-miller.com/eth>.
 
 ## How it was made
 
-Prepared by Lee Miller with Claude, an AI model made by Anthropic. Anthropic is one of the two labs whose claims are reviewed, and the same scepticism is applied to both. The research and drafting were done by AI agents. Their cited links were checked automatically on 11 November 2026: in the physics report 44 of 46 load, and in the P vs NP report 99 of 106 load. The failures are paywalls, rate limits or sites that refuse automated requests, and each report says which ones it could not read.
+Prepared by Lee Miller with Claude, an AI model made by Anthropic. Anthropic is one of the two labs whose claims are reviewed, and the same scepticism is applied to both. The research and drafting were done by AI agents.
+
+Their cited links were checked automatically on 11 November 2026: in the physics report 44 of 46 load, and in the P vs NP report 99 of 106 load. The failures are paywalls, rate limits or sites that refuse automated requests, and each report says which ones it could not read.
 
 ## Corrections
 

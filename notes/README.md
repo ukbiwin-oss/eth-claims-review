@@ -16,7 +16,9 @@ These notes take inferences that [the physics report](../eth-claims-and-quantum-
 
 ## The encoder
 
-The correctness of the encoding rests on the short argument in the header of `poly3_to_cnf.py`: for a fixed x the constraints force each chain variable in turn, and the last constraint holds exactly when f(x) = 0. The tests are there to catch a mistake in the code. The tests that enumerate everything stop well short of the target size; at that size only a sample is possible.
+The correctness of the encoding rests on the short argument in the header of `poly3_to_cnf.py`: for a fixed x the constraints force each chain variable in turn, and the last constraint holds exactly when f(x) = 0.
+
+The tests are there to catch a mistake in the code. The tests that enumerate everything stop well short of the target size; at that size only a sample is possible.
 
 Two checks are used. They share the encoder but not the argument: neither knows about chains or parity.
 
@@ -41,13 +43,19 @@ So the report's "about 700" is right as an upper bound for 500 gates, and exact 
 
 ## What this does and does not establish
 
-It supports the encoding and gives the count. It does not establish anything about running time, which is the part of the report's inference that matters: that a counter running in 2^{o(N)} time on such CNFs would compute gap(f), an output amplitude of a circuit with O(n) gates, in 2^{o(n)} time, where the 500-gate figures assume a cost proportional to the number of gates times 2^{an}. That step is unchanged and is still an inference.
+It supports the encoding and gives the count. It does not establish anything about running time, which is the part of the report's inference that matters: that a counter running in 2^{o(N)} time on such CNFs would compute gap(f), an output amplitude of a circuit with O(n) gates, in 2^{o(n)} time, where the 500-gate figures assume a cost proportional to the number of gates times 2^{an}.
 
-Two limits are worth stating. At this size N is about 3.4n, so a counter running in 2^{δN} time undercuts the 2^{an} cost assumed in those figures only if δ is below a·208/707: about 0.15 for the a = 1/2 that Dalzell et al. take, and about 0.29 against plain enumeration of the 2^208 inputs. And the encoder says nothing useful about dense instances, where the number of monomials grows like n³ and this encoding gives far more CNF variables than the polynomial has.
+That step is unchanged and is still an inference.
+
+Two limits are worth stating. At this size N is about 3.4n, so a counter running in 2^{δN} time undercuts the 2^{an} cost assumed in those figures only if δ is below a·208/707: about 0.15 for the a = 1/2 that Dalzell et al. take, and about 0.29 against plain enumeration of the 2^208 inputs.
+
+And the encoder says nothing useful about dense instances, where the number of monomials grows like n³ and this encoding gives far more CNF variables than the polynomial has.
 
 ## How these notes were checked
 
-By the tests above, by reading the cited passages of the two source papers, and by asking a language model to referee a draft of each note. The model found no error in the five steps of note 1 or in the encoding; over two rounds it did find a wrong justification and a wrong remark in note 1, and several weak tests and loose statements here, which were corrected. That is proofreading. It is not review by an expert, and the notes stay marked unreviewed until one has read them.
+By the tests above, by reading the cited passages of the two source papers, and by asking a language model to referee a draft of each note.
+
+The model found no error in the five steps of note 1 or in the encoding; over two rounds it did find a wrong justification and a wrong remark in note 1, and several weak tests and loose statements here, which were corrected. That is proofreading. It is not review by an expert, and the notes stay marked unreviewed until one has read them.
 
 ## Not done yet
 
